@@ -1,5 +1,3 @@
-require 'net/http'
-
 class StaticPagesController < ApplicationController
   def home
     if params[:search].present?
@@ -9,24 +7,45 @@ class StaticPagesController < ApplicationController
 
   def find_movies
     # first response returns list of movies with imdb_ids
-    response = Net::HTTP.get_response(initial_query)
-    data = JSON.parse(response.body)
+    data = JSON.parse(initial_request.body)
     initial_results = data["Search"]
+    if !initial_results
+      render partial: 'not_found'
+      return
+
+    end
     @imdb_ids = initial_results.map { |result| result["imdbID"] }
     @movies = movies
   end
 
-  private
 
-  def initial_query
-    URI("https://www.omdbapi.com/?apikey=#{Figaro.env.omdb_api_key}&s=#{params[:search]}")
+  def initial_request
+    # imdb id only accessible by first doing a generic search
+    # once relevant ids are available, we can get more complete details by requesting with the id parameter
+    Typhoeus.get("https://www.omdbapi.com/?apikey=#{Figaro.env.omdb_api_key}&s=#{params[:search]}")
   end
 
   def movies
-    @imdb_ids.map do |id|
-      query = URI("https://www.omdbapi.com/?apikey=#{Figaro.env.omdb_api_key}&i=#{id}")
-      response = Net::HTTP.get_response(query)
-      movie = JSON.parse(response.body)
+    # improve performance by caching requests and making requests in parallel
+    hydra = Typhoeus::Hydra.new
+    requests = parallel_requests(hydra)
+    hydra.run
+    requests.map do |request|
+      response = JSON.parse(request.response.body) if request.response.code == 200 
+      response["imdb_page"] = imdb_page(response["imdbID"])
+      response
     end
+  end
+
+  def parallel_requests(hydra)
+    @imdb_ids.map do |id|
+      request = Typhoeus::Request.new("https://www.omdbapi.com/?apikey=#{Figaro.env.omdb_api_key}&i=#{id}")
+      hydra.queue(request)
+      request
+    end
+  end
+
+  def imdb_page(id)
+    "https://www.imdb.com/title/#{id}"
   end
 end

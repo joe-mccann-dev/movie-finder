@@ -1,11 +1,6 @@
 
 <div class="form">
-  <%= form_with(url: root_url, method: :get) do |f| %>
-    <%= f.label :search, "Search for movies" %>
-    <%= f.text_field :search, value: params[:search], required: true, placeholder: "enter a movie title" %>
-
-    <%= f.submit "Search" %>
-  <% end %>
+  <%= render 'form' %>
 </div>
 
 

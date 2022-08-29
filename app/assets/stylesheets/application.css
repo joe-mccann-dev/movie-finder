@@ -16,4 +16,15 @@
 
  .result {
   display: flex;
+  align-items: center;
+ }
+
+ .detail {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+ }
+
+ .detail-category {
+  font-weight: bold;
  }
