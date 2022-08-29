@@ -1,5 +1,4 @@
-<%= form_with(url: root_url, method: :get) do |f| %>
-    <%= f.label :search, "Search for Movies by Title: " %>
+<%= form_with(url: root_url, method: :get, class: 'form') do |f| %>
     <%= f.text_field :search, value: params[:search], required: true, placeholder: "The Wizard of Oz" %>
 
     <%= f.submit "Find Movies", name: nil %>
