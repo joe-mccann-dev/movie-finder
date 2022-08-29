@@ -10,7 +10,9 @@ class StaticPagesController < ApplicationController
     data = JSON.parse(initial_request.body)
     initial_results = data["Search"]
     if !initial_results
-      render partial: 'not_found'
+      flash[:error] = "No results found, please search again."
+      redirect_to root_url
+      
       return
 
     end

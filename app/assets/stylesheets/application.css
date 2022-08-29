@@ -38,6 +38,8 @@
 
  .form {
   display: flex;
+  justify-content: center;
+  /* align-items: center; */
   gap: 32px;
   width: 100%;
  }
@@ -48,13 +50,15 @@
 
  input[type="text"] {
   height: 24px;
-  width: 220px;
+  /* width: 220px; */
   padding: 8px;
   font-size: 1.2rem;
  }
 
  input[type="submit"] {
   font-weight: 700;
+  flex: 1;
+  max-width: 300px;
   background-color: lightgreen;
  }
 
@@ -81,4 +85,11 @@
 
  a {
   text-decoration: none;
+ }
+ 
+ .error {
+  color: #eee;
+  background-color: orangered;
+  padding: 12px;
+  font-weight: 700;
  }
