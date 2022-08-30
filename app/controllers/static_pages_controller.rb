@@ -1,8 +1,6 @@
 class StaticPagesController < ApplicationController
   def home
-    if params[:search].present?
-      find_movies
-    end
+    find_movies if params[:search].present?
   end
 
   def find_movies
