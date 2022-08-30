@@ -36,6 +36,21 @@
   color: #262626;
  }
 
+ .credits {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+ }
+
+ .github-logo {
+  color: #22d3ee;
+ }
+
+ .github-logo:hover {
+  transform: rotate(-360deg);
+  transition: .4s;
+ }
+
  .container {
   padding: 48px;
   border: solid #fbbf24 4px;
@@ -68,6 +83,7 @@
   width: 220px;
   max-width: 240px;
   background-color: #22d3ee;
+  cursor: pointer;
  }
 
  .field {
