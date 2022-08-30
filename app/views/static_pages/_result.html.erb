@@ -2,7 +2,7 @@
   <% if result["Poster"] != 'N/A' %>
     <%= image_tag(result["Poster"], alt: "Movie Poster for #{result["Title"]}") %>
   <% else %>
-    <p>Image not found</p>
+    <%= image_tag("https://dummyimage.com/300x425/555/fff.png&text=no+poster+found", alt: "Placeholder image") %>
   <% end %>
   <ul class="movie-details">
     <li class="detail">
