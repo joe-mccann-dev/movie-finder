@@ -1,5 +1,12 @@
 <%= form_with(url: root_url, method: :get, class: 'form') do |f| %>
-    <%= f.text_field :search, value: params[:search], required: true, placeholder: "The Wizard of Oz" %>
 
-    <%= f.submit "Find Movies", name: nil %>
-  <% end %>
+  <div class="field">
+    <%= f.label :search, "title"%>
+    <%= f.text_field :search, value: params[:search], required: true, placeholder: "Search by title or title contents." %>
+  </div>
+  <div class="field">
+    <%= f.label :release_year, "release year"%>
+    <%= f.number_field :release_year, min: 1888, max: 2023, placeholder: "year" %>
+  </div>    
+  <%= f.submit "Find Movies", name: nil %>
+<% end %>

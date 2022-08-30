@@ -18,7 +18,7 @@
 
  html {
   box-sizing: border-box;
-  background-color: #ddd;
+  background-color: #262626;
  }
 
  ul {
@@ -33,31 +33,51 @@
   font-family: 'Lato', sans-serif;
   padding: 12px;
   width: 100%;
-  color: #222;
+  color: #262626;
+ }
+
+ .container {
+  padding: 48px;
+  border: solid #fbbf24 4px;
+  border-radius: 12px;
+  background-color: #d4d4d4;
  }
 
  .form {
   display: flex;
+  align-items: flex-end;
   gap: 32px;
   width: 100%;
  }
 
  input {
   border-radius: 8px;
+  font-size: 1.2rem;
+  padding: 8px;
  }
 
  input[type="text"] {
   height: 24px;
-  /* width: 220px; */
-  padding: 8px;
+  width: 300px;
   font-size: 1.2rem;
  }
 
  input[type="submit"] {
   font-weight: 700;
   flex: 1;
-  max-width: 300px;
-  background-color: lightgreen;
+  width: 220px;
+  max-width: 240px;
+  background-color: #22d3ee;
+ }
+
+ .field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+ }
+
+ label {
+  font-size: 1.2rem;
  }
 
  .result {
@@ -68,6 +88,8 @@
 
  .movie-details {
   margin-left: 32px;
+  max-width: 400px;
+  text-align: justify;
  }
 
  .detail {
@@ -79,10 +101,12 @@
 
  .detail-category {
   font-weight: 700;
+  font-size: 1.1rem;
  }
 
  a {
   text-decoration: none;
+  color: #0891b2;
  }
  
  .error {

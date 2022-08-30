@@ -12,7 +12,6 @@ class StaticPagesController < ApplicationController
     if !initial_results
       flash[:error] = "No results found, please search again."
       redirect_to root_url
-      
       return
 
     end
@@ -24,7 +23,7 @@ class StaticPagesController < ApplicationController
   def initial_request
     # imdb id only accessible by first doing a generic search
     # once relevant ids are available, we can get more complete details by requesting with the id parameter
-    Typhoeus.get("https://www.omdbapi.com/?apikey=#{Figaro.env.omdb_api_key}&s=#{params[:search]}")
+    Typhoeus.get("https://www.omdbapi.com/?apikey=#{Figaro.env.omdb_api_key}&s=#{params[:search]}&type=movie&y=#{params[:release_year]}")
   end
 
   def movies
