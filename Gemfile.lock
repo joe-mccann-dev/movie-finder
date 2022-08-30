@@ -192,7 +192,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  bootsnap
+  bootsnap (~> 1.13)
   debug
   figaro
   importmap-rails
